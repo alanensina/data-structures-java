@@ -36,7 +36,19 @@ public class LinkedList {
         this.length++;
     }
 
-    public void prepend(int value){}
+    public void prepend(int value){
+        Node newNode = new Node(value);
+
+        if(this.length == 0){
+            this.head = newNode;
+            this.tail = newNode;
+        } else {
+            newNode.next = this.head;
+            this.head = newNode;
+        }
+
+        this.lenght++;
+    }
 
     public boolean insert(int value){
         return false;
@@ -62,7 +74,6 @@ public class LinkedList {
         while(temp.next != null){
             pre = temp;
             temp = temp.next;
-
         }
 
         this.tail = pre;
