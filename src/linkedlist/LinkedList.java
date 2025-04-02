@@ -79,9 +79,50 @@ public class LinkedList {
         return temp;
     }
 
+    public Node removeFirst(){
+        Node node;
+
+        if(this.length == 0) return null;
+
+        node = this.head;
+        this.head = this.head.next;
+        node.next = null;
+        this.length--;
+
+        if(this.length == 0){
+            this.tail = null;
+        }
+
+        return node;
+    }
+
     public Node getHead() {
         System.out.println("Head: " + this.head.value);
         return head;
+    }
+
+    public Node get(int index){
+
+        if(index < 0 || index >= this.length) return null;
+
+        Node temp = this.head;
+
+        for(int i = 0 ; i < index ; i++){
+            temp = temp.next;
+        }
+
+        return temp;
+    }
+
+    public boolean set(int index, int value){
+        Node temp = get(index);
+
+        if(temp != null){
+            temp.value = value;
+            return true;
+        }
+
+        return false;
     }
 
     public void setHead(Node head) {
