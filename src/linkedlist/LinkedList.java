@@ -33,7 +33,7 @@ public class LinkedList {
             this.tail = newNode;
         }
 
-        this.length++;
+        increaseLength();
     }
 
     public void prepend(int value){
@@ -47,7 +47,7 @@ public class LinkedList {
             this.head = newNode;
         }
 
-        this.length++;
+        decreaseLength();
     }
 
     public boolean insert(int value, int index){
@@ -69,7 +69,7 @@ public class LinkedList {
         newNode.next = previousNode.next; // point the new node to the node that the previous are pointing
         previousNode.next = newNode; // point the previous node to the new node
 
-        this.length++;
+        increaseLength();
 
         return true;
     }
@@ -85,7 +85,7 @@ public class LinkedList {
         Node node = previousNode.next; // get the node that will be removed
         previousNode.next = node.next; // point the previous node to the next node of the node that will be removed
         node.next = null; // unlink the node removed of other element
-        this.length--;
+        decreaseLength();
 
         return node;
     }
@@ -114,7 +114,7 @@ public class LinkedList {
 
         this.tail = pre;
         this.tail.next = null;
-        this.length--;
+        decreaseLength();
 
         // If the LinkedList has one element and this element is removed, we need to set the head and tail to null.
         if(this.length == 0){
@@ -134,18 +134,13 @@ public class LinkedList {
         node = this.head;
         this.head = this.head.next;
         node.next = null;
-        this.length--;
+        decreaseLength();
 
         if(this.length == 0){
             this.tail = null;
         }
 
         return node;
-    }
-
-    public Node getHead() {
-        System.out.println("Head: " + this.head.value);
-        return head;
     }
 
     public Node get(int index){
@@ -172,25 +167,11 @@ public class LinkedList {
         return false;
     }
 
-    public void setHead(Node head) {
-        this.head = head;
+    private void increaseLength(){
+        this.length++;
     }
 
-    public Node getTail() {
-        System.out.println("Tail: " + this.tail.value);
-        return tail;
-    }
-
-    public void setTail(Node tail) {
-        this.tail = tail;
-    }
-
-    public int getLength() {
-        System.out.println("Length: " + this.length);
-        return length;
-    }
-
-    public void setLength(int length) {
-        this.length = length;
+    private void decreaseLength(){
+        this.length--;
     }
 }
