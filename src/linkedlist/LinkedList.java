@@ -47,11 +47,47 @@ public class LinkedList {
             this.head = newNode;
         }
 
-        this.lenght++;
+        this.length++;
     }
 
-    public boolean insert(int value){
-        return false;
+    public boolean insert(int value, int index){
+
+        if(index < 0 || index > this.length) return false;
+
+        if(index == 0){
+            prepend(value);
+            return true;
+        }
+
+        if(index == this.length){
+            append(value);
+            return true;
+        }
+
+        Node newNode = new Node(value); // new node to be added
+        Node previousNode = get(index - 1); // get the previous node of the index desired
+        newNode.next = previousNode.next; // point the new node to the node that the previous are pointing
+        previousNode.next = newNode; // point the previous node to the new node
+
+        this.length++;
+
+        return true;
+    }
+
+    public Node remove(int index){
+
+        if(index < 0 || index > this.length) return null;
+
+        if(index == 0) return removeFirst();
+        if(index == this.length - 1) return removeLast();
+
+        Node previousNode = get(index - 1); // get the previous node
+        Node node = previousNode.next; // get the node that will be removed
+        previousNode.next = node.next; // point the previous node to the next node of the node that will be removed
+        node.next = null; // unlink the node removed of other element
+        this.length--;
+
+        return node;
     }
 
     public void printList(){
