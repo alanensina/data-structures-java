@@ -90,15 +90,6 @@ public class LinkedList {
         return node;
     }
 
-    public void printList(){
-        Node temp = this.head;
-
-        while(temp != null){
-            System.out.println(temp.value);
-            temp = temp.next;
-        }
-    }
-
     public Node removeLast(){
 
         // If the LinkedList is empty, there's no need to remove a Node
@@ -165,6 +156,34 @@ public class LinkedList {
         }
 
         return false;
+    }
+
+    public void reverse(){
+
+        // Invert the head and tail first
+        Node temp = this.head;
+        this.head = this.tail;
+        this.tail = temp;
+
+        // Set 2 nodes in the beginning of the List
+        Node after = temp.next;
+        Node before = null;
+
+        for(int i = 0; i < this.length; i++){
+            after = temp.next;
+            temp.next = before;
+            before = temp;
+            temp = after;
+        }
+    }
+
+    public void printList(){
+        Node temp = this.head;
+
+        while(temp != null){
+            System.out.println(temp.value);
+            temp = temp.next;
+        }
     }
 
     private void increaseLength(){
