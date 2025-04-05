@@ -177,6 +177,22 @@ public class LinkedList {
         }
     }
 
+    // Floyd's Tortoise and Hare algorithm: 
+    // The key idea is to have two pointers, one that moves twice as fast as the other. 
+    // By the time the fast pointer reaches the end of the linked list, the slow pointer will be at the middle.
+    public Node findMiddleNode(){
+           
+	    Node turtle = this.head;
+	    Node rabbit = this.head;
+	    
+	    while(rabbit != null && rabbit.next != null){
+	        turtle = turtle.next;
+	        rabbit = rabbit.next.next;
+	    }
+	    
+	    return turtle;
+	}
+
     public void printList(){
         Node temp = this.head;
 
