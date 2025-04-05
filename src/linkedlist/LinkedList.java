@@ -191,7 +191,25 @@ public class LinkedList {
 	    }
 	    
 	    return turtle;
+    }
+
+    // Floyd's Tortoise and Hare algorithm: 
+    // The key idea is to have two pointers, one that moves twice as fast as the other. 
+    // If the turtle is equal then rabbit, has a loop, if they don't, doesn't have a loop.
+    public boolean hasLoop(){
+           
+	Node turtle = this.head;
+	Node rabbit = this.head;
+	    
+	while(rabbit != null && rabbit.next != null){
+		turtle = turtle.next;
+		rabbit = rabbit.next.next;
+
+		if(turtle == rabbit) return true;
 	}
+	    
+	return false;
+    }
 
     public void printList(){
         Node temp = this.head;
