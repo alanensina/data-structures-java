@@ -10,22 +10,22 @@ public class LinkedList {
         int value;
         Node next;
 
-        Node(int value){
+        Node(int value) {
             this.value = value;
         }
     }
 
-    public LinkedList(int value){
+    public LinkedList(int value) {
         Node newNode = new Node(value);
         this.head = newNode;
         this.tail = newNode;
         this.length = 1;
     }
 
-    public void append(int value){
+    public void append(int value) {
         Node newNode = new Node(value);
 
-        if(this.length == 0){
+        if (this.length == 0) {
             this.head = newNode;
             this.tail = newNode;
         } else {
@@ -36,10 +36,10 @@ public class LinkedList {
         increaseLength();
     }
 
-    public void prepend(int value){
+    public void prepend(int value) {
         Node newNode = new Node(value);
 
-        if(this.length == 0){
+        if (this.length == 0) {
             this.head = newNode;
             this.tail = newNode;
         } else {
@@ -50,16 +50,16 @@ public class LinkedList {
         decreaseLength();
     }
 
-    public boolean insert(int value, int index){
+    public boolean insert(int value, int index) {
 
-        if(index < 0 || index > this.length) return false;
+        if (index < 0 || index > this.length) return false;
 
-        if(index == 0){
+        if (index == 0) {
             prepend(value);
             return true;
         }
 
-        if(index == this.length){
+        if (index == this.length) {
             append(value);
             return true;
         }
@@ -74,12 +74,12 @@ public class LinkedList {
         return true;
     }
 
-    public Node remove(int index){
+    public Node remove(int index) {
 
-        if(index < 0 || index > this.length) return null;
+        if (index < 0 || index > this.length) return null;
 
-        if(index == 0) return removeFirst();
-        if(index == this.length - 1) return removeLast();
+        if (index == 0) return removeFirst();
+        if (index == this.length - 1) return removeLast();
 
         Node previousNode = get(index - 1); // get the previous node
         Node node = previousNode.next; // get the node that will be removed
@@ -90,15 +90,15 @@ public class LinkedList {
         return node;
     }
 
-    public Node removeLast(){
+    public Node removeLast() {
 
         // If the LinkedList is empty, there's no need to remove a Node
-        if(this.length == 0) return null;
+        if (this.length == 0) return null;
 
         Node pre = this.head;
         Node temp = this.head;
 
-        while(temp.next != null){
+        while (temp.next != null) {
             pre = temp;
             temp = temp.next;
         }
@@ -108,7 +108,7 @@ public class LinkedList {
         decreaseLength();
 
         // If the LinkedList has one element and this element is removed, we need to set the head and tail to null.
-        if(this.length == 0){
+        if (this.length == 0) {
             this.tail = null;
             this.head = null;
         }
@@ -117,40 +117,40 @@ public class LinkedList {
         return temp;
     }
 
-    public Node removeFirst(){
+    public Node removeFirst() {
         Node node;
 
-        if(this.length == 0) return null;
+        if (this.length == 0) return null;
 
         node = this.head;
         this.head = this.head.next;
         node.next = null;
         decreaseLength();
 
-        if(this.length == 0){
+        if (this.length == 0) {
             this.tail = null;
         }
 
         return node;
     }
 
-    public Node get(int index){
+    public Node get(int index) {
 
-        if(index < 0 || index >= this.length) return null;
+        if (index < 0 || index >= this.length) return null;
 
         Node temp = this.head;
 
-        for(int i = 0 ; i < index ; i++){
+        for (int i = 0; i < index; i++) {
             temp = temp.next;
         }
 
         return temp;
     }
 
-    public boolean set(int index, int value){
+    public boolean set(int index, int value) {
         Node temp = get(index);
 
-        if(temp != null){
+        if (temp != null) {
             temp.value = value;
             return true;
         }
@@ -158,7 +158,7 @@ public class LinkedList {
         return false;
     }
 
-    public void reverse(){
+    public void reverse() {
 
         // Invert the head and tail first
         Node temp = this.head;
@@ -169,7 +169,7 @@ public class LinkedList {
         Node after = temp.next;
         Node before = null;
 
-        for(int i = 0; i < this.length; i++){
+        for (int i = 0; i < this.length; i++) {
             after = temp.next;
             temp.next = before;
             before = temp;
@@ -180,51 +180,68 @@ public class LinkedList {
     // Floyd's Tortoise and Hare algorithm: 
     // The key idea is to have two pointers, one that moves twice as fast as the other. 
     // By the time the fast pointer reaches the end of the linked list, the slow pointer will be at the middle.
-    public Node findMiddleNode(){
-           
-	    Node turtle = this.head;
-	    Node rabbit = this.head;
-	    
-	    while(rabbit != null && rabbit.next != null){
-	        turtle = turtle.next;
-	        rabbit = rabbit.next.next;
-	    }
-	    
-	    return turtle;
+    public Node findMiddleNode() {
+
+        Node turtle = this.head;
+        Node rabbit = this.head;
+
+        while (rabbit != null && rabbit.next != null) {
+            turtle = turtle.next;
+            rabbit = rabbit.next.next;
+        }
+
+        return turtle;
     }
 
     // Floyd's Tortoise and Hare algorithm: 
     // The key idea is to have two pointers, one that moves twice as fast as the other. 
     // If the turtle is equal then rabbit, has a loop, if they don't, doesn't have a loop.
-    public boolean hasLoop(){
-           
-	Node turtle = this.head;
-	Node rabbit = this.head;
-	    
-	while(rabbit != null && rabbit.next != null){
-		turtle = turtle.next;
-		rabbit = rabbit.next.next;
+    public boolean hasLoop() {
 
-		if(turtle == rabbit) return true;
-	}
-	    
-	return false;
+        Node turtle = this.head;
+        Node rabbit = this.head;
+
+        while (rabbit != null && rabbit.next != null) {
+            turtle = turtle.next;
+            rabbit = rabbit.next.next;
+
+            if (turtle == rabbit) return true;
+        }
+
+        return false;
     }
 
-    public void printList(){
+    public Node findKthFromEnd(int k) {
+        Node fast = this.head;
+        Node slow = this.head;
+
+        for (int i = 0; i < k; i++) {
+            if (fast == null) return null;
+            fast = fast.next;
+        }
+
+        while (fast != null) {
+            slow = slow.next;
+            fast = fast.next;
+        }
+
+        return slow;
+    }
+
+    public void printList() {
         Node temp = this.head;
 
-        while(temp != null){
+        while (temp != null) {
             System.out.println(temp.value);
             temp = temp.next;
         }
     }
 
-    private void increaseLength(){
+    private void increaseLength() {
         this.length++;
     }
 
-    private void decreaseLength(){
+    private void decreaseLength() {
         this.length--;
     }
 }
