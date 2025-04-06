@@ -228,6 +228,57 @@ public class LinkedList {
         return slow;
     }
 
+    // This method will rearrange the list based on X value. 
+    // Values < than X will become in the beginning of the list, values >= will be in the end of the list.
+    public void partitionList(int x){
+        
+        if(getHead() == null) return;
+        
+        Node lessHead = null;
+        Node lessTail = null;
+        Node greaterHead = null;
+        Node greaterTail = null;
+        Node currentNode = getHead();
+        Node nextNode = null;
+
+        
+        while(currentNode != null){
+            nextNode = currentNode.next;
+            currentNode.next = null;
+            
+            if(currentNode.value < x){
+                if (lessHead == null) {
+                    lessHead = currentNode;
+                    lessTail = currentNode;
+                } else {
+                    lessTail.next = currentNode;
+                    lessTail = currentNode;
+                }
+            }else{
+                if (greaterHead == null) {
+                    greaterHead = currentNode;
+                    greaterTail = currentNode;
+                } else {
+                    greaterTail.next = currentNode;
+                    greaterTail = currentNode;
+                }
+            }
+            
+            currentNode = nextNode;
+        }
+        
+        if(lessHead == null){
+            this.head = greaterHead;
+        }else{
+            lessTail.next = greaterHead;
+            this.head = lessHead;
+        }
+
+        if(greaterTail != null){
+            this.tail = greaterTail;
+        }        
+    }
+
     public void printList() {
         Node temp = this.head;
 
