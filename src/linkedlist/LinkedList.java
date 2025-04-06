@@ -1,5 +1,8 @@
 package linkedlist;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class LinkedList {
 
     private Node head;
@@ -231,21 +234,21 @@ public class LinkedList {
     // This method will rearrange the list based on X value. 
     // Values < than X will become in the beginning of the list, values >= will be in the end of the list.
     public void partitionList(int x){
-        
-        if(getHead() == null) return;
-        
+
+        if(this.head == null) return;
+
         Node lessHead = null;
         Node lessTail = null;
         Node greaterHead = null;
         Node greaterTail = null;
-        Node currentNode = getHead();
+        Node currentNode = this.head;
         Node nextNode = null;
 
-        
+
         while(currentNode != null){
             nextNode = currentNode.next;
             currentNode.next = null;
-            
+
             if(currentNode.value < x){
                 if (lessHead == null) {
                     lessHead = currentNode;
@@ -263,10 +266,10 @@ public class LinkedList {
                     greaterTail = currentNode;
                 }
             }
-            
+
             currentNode = nextNode;
         }
-        
+
         if(lessHead == null){
             this.head = greaterHead;
         }else{
@@ -276,12 +279,12 @@ public class LinkedList {
 
         if(greaterTail != null){
             this.tail = greaterTail;
-        }        
+        }
     }
 
     public void removeDuplicates() {
         if (this.head == null) return;
-        
+
         Set<Integer> values = new HashSet<>();
         Node currentNode = this.head;
         Node previousNode = null;
@@ -299,32 +302,32 @@ public class LinkedList {
             if (currentNode == this.tail && values.contains(currentNode.value)) {
                 this.tail = previousNode;
             }
-            
+
             currentNode = currentNode.next;
         }
     }
 
     public void reverseBetween(int startIndex, int endIndex) {
         if (head == null) return;
-    
+
         Node dummyNode = new Node(0);
         dummyNode.next = head;
         Node previousNode = dummyNode;
-    
+
         for (int i = 0; i < startIndex; i++) {
             previousNode = previousNode.next;
         }
-    
+
         Node currentNode = previousNode.next;
-    
+
         for (int i = 0; i < endIndex - startIndex; i++) {
             Node nodeToMove = currentNode.next;
             currentNode.next = nodeToMove.next;
             nodeToMove.next = previousNode.next;
             previousNode.next = nodeToMove;
         }
-       
-        head = dummyNode.next; 
+
+        head = dummyNode.next;
     }
 
     public void printList() {
