@@ -279,6 +279,31 @@ public class LinkedList {
         }        
     }
 
+    public void removeDuplicates() {
+        if (this.head == null) return;
+        
+        Set<Integer> values = new HashSet<>();
+        Node currentNode = this.head;
+        Node previousNode = null;
+
+        while (currentNode != null) {
+            if (values.contains(currentNode.value)) {
+                previousNode.next = currentNode.next;
+                currentNode.next = null;
+                this.length--;
+            } else {
+                values.add(currentNode.value);
+                previousNode = currentNode;
+            }
+
+            if (currentNode == this.tail && values.contains(currentNode.value)) {
+                this.tail = previousNode;
+            }
+            
+            currentNode = currentNode.next;
+        }
+    }
+
     public void printList() {
         Node temp = this.head;
 
