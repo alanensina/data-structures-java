@@ -339,6 +339,14 @@ public class LinkedList {
         }
     }
 
+    public void printAll(){
+        System.out.println("Head: " + this.head.value);
+        System.out.println("Tail: " + this.tail.value);
+        System.out.println("Length: " + this.length);
+        System.out.println("Values: ");
+        printList();
+    }
+
     private void increaseLength() {
         this.length++;
     }
