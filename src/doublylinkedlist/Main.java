@@ -11,8 +11,11 @@ public class Main {
 
         //list.removeLast();
         //list.prepend(10);
-        list.removeFirst();
+        //list.removeFirst();
 
+        //list.printAll();
+
+        list.insert(4, 6);
         list.printAll();
     }
 }
