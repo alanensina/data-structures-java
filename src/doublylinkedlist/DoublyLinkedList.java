@@ -62,4 +62,59 @@ public class DoublyLinkedList {
 
         increaseLength();
     }
+
+    public Node removeLast(){
+
+        if(this.length == 0) return null;
+
+        Node temp = this.tail;
+
+        if(this.length == 1) {
+            this.head = null;
+            this.tail = null;
+        }else{
+            this.tail = temp.previous;
+            tail.next = null;
+        }
+
+        temp.next = null;
+        temp.previous = null;
+
+        decreaseLength();
+        return temp;
+    }
+
+    public void prepend(int value){
+
+        if(this.length == 0){
+            append(value);
+        }else{
+            Node newNode = new Node(value);
+            newNode.next = this.head;
+            this.head.previous = newNode;
+            this.head = newNode;
+            increaseLength();
+        }
+    }
+
+    public Node removeFirst(){
+
+        if(this.length == 0) return null;
+
+        Node temp = this.head;
+
+        if(this.length == 1) {
+            this.head = null;
+            this.tail = null;
+        }else{
+            this.head = temp.next;
+            this.head.previous = null;
+        }
+
+        temp.next = null;
+        temp.previous = null;
+
+        decreaseLength();
+        return temp;
+    }
 }

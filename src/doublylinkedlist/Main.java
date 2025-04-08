@@ -8,6 +8,11 @@ public class Main {
         list.append(9);
         list.append(2);
         list.append(3);
+
+        //list.removeLast();
+        //list.prepend(10);
+        list.removeFirst();
+
         list.printAll();
     }
 }
