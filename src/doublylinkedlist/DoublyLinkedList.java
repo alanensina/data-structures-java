@@ -175,4 +175,26 @@ public class DoublyLinkedList {
         increaseLength();
         return true;
     }
+
+    public Node remove(int index){
+        if(index < 0 || index >= this.length) return null;
+
+        if(index == 0){
+            return removeFirst();
+        } else if (index == this.length - 1) {
+            return removeLast();
+        }
+
+        Node removedNode = get(index);
+        Node before = removedNode.previous;
+        Node after = removedNode.next;
+        before.next = after;
+        after.previous = before;
+
+        removedNode.next = null;
+        removedNode.previous = null;
+
+        decreaseLength();
+        return removedNode;
+    }
 }
