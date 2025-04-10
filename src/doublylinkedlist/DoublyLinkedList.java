@@ -224,4 +224,21 @@ public class DoublyLinkedList {
 	      this.tail = temp;
 	    }
     }
+
+    public boolean isPalindrome(){
+	    
+    	if(this.length < 2) return true;
+	   
+	    Node start = this.head;
+	    Node end = this.tail;
+	    
+	    for(int i = 0 ; i < this.length/2 ; i++){
+	        if(start.value != end.value) return false;
+	        
+	        start = start.next;
+	        end = end.prev;
+	    }
+	    
+	    return true;
+	}
 }
