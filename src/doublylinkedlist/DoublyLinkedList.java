@@ -205,36 +205,23 @@ public class DoublyLinkedList {
             tail.value = temp;
         }
     }
-
-    // TODO: WIP
+    
     public void reverse(){
-        if(this.length >= 2){
+        if(this.length >= 2) {
+	      Node currentNode = this.head; // Set a pointer to the beggining of the list
+	      Node temp = null;
+	      
+	      while(currentNode != null){ // Iterate the list while the pointer is not null
+	          temp = currentNode.previous; // Store the previous node of the pointer in a temporary node
+	          currentNode.previous = currentNode.next; // Invert the pointer of the previous with next
+	          currentNode.next = temp; // Invert the pointer of the next with previous
+	          currentNode = currentNode.previous; // Move the pointer to the previous node
+	      }
 
-            for(int i = 0 ; i < this.length/2 ; i++){
-                Node start = get(i); // Get the most left node
-                Node end = get(this.length-1-i); // Get the most right node
-
-                Node after = start.next; // Get the next node of the most left node
-                Node before = end.previous; // Get the previous node of the most right node
-
-                Node swapperStart = start; // Save the reference of the start
-                Node swapperEnd = end; // Save the reference of the end
-
-                Node swapper = start;
-                start = end;
-                end = swapper;
-
-                start.previous = swapperStart.previous;
-                end.next = swapperEnd.next;
-
-                after.previous = start;
-                before.next = end;
-            }
-
-            // Invert the head and tail.
-            Node temp = this.head;
-            this.head = this.tail;
-            this.tail = temp;
-        }
+        // Invert the head with tail
+	      temp = this.head;
+	      this.head = this.tail;
+	      this.tail = temp;
+	    }
     }
 }
