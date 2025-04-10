@@ -6,8 +6,8 @@ public class Main {
 
         DoublyLinkedList list = new DoublyLinkedList(8);
         list.append(9);
-       // list.append(2);
-       // list.append(3);
+        list.append(2);
+        list.append(3);
 
         //list.removeLast();
         //list.prepend(10);
@@ -16,7 +16,10 @@ public class Main {
         //list.printAll();
 
         //list.insert(4, 6);
-        list.remove(0);
+        //list.remove(0);
+
+        //list.swapFirstWithLast();
+        list.reverse();
         list.printAll();
     }
 }

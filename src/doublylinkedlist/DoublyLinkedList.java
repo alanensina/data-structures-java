@@ -197,4 +197,44 @@ public class DoublyLinkedList {
         decreaseLength();
         return removedNode;
     }
+
+    public void swapFirstWithLast(){
+        if(this.length >= 2){
+            int temp = head.value;
+            head.value = tail.value;
+            tail.value = temp;
+        }
+    }
+
+    // TODO: WIP
+    public void reverse(){
+        if(this.length >= 2){
+
+            for(int i = 0 ; i < this.length/2 ; i++){
+                Node start = get(i); // Get the most left node
+                Node end = get(this.length-1-i); // Get the most right node
+
+                Node after = start.next; // Get the next node of the most left node
+                Node before = end.previous; // Get the previous node of the most right node
+
+                Node swapperStart = start; // Save the reference of the start
+                Node swapperEnd = end; // Save the reference of the end
+
+                Node swapper = start;
+                start = end;
+                end = swapper;
+
+                start.previous = swapperStart.previous;
+                end.next = swapperEnd.next;
+
+                after.previous = start;
+                before.next = end;
+            }
+
+            // Invert the head and tail.
+            Node temp = this.head;
+            this.head = this.tail;
+            this.tail = temp;
+        }
+    }
 }
