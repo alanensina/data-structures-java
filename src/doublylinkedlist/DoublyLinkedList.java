@@ -9,7 +9,7 @@ public class DoublyLinkedList {
     class Node {
         int value;
         Node next;
-        Node previous;
+        Node previousious;
 
         Node(int value) {
             this.value = value;
@@ -55,7 +55,7 @@ public class DoublyLinkedList {
             this.head = newNode;
             this.tail = newNode;
         } else {
-            newNode.previous = this.tail;
+            newNode.previousious = this.tail;
             this.tail.next = newNode;
             this.tail = newNode;
         }
@@ -73,12 +73,12 @@ public class DoublyLinkedList {
             this.head = null;
             this.tail = null;
         }else{
-            this.tail = temp.previous;
+            this.tail = temp.previousious;
             tail.next = null;
         }
 
         temp.next = null;
-        temp.previous = null;
+        temp.previousious = null;
 
         decreaseLength();
         return temp;
@@ -91,7 +91,7 @@ public class DoublyLinkedList {
         }else{
             Node newNode = new Node(value);
             newNode.next = this.head;
-            this.head.previous = newNode;
+            this.head.previousious = newNode;
             this.head = newNode;
             increaseLength();
         }
@@ -108,11 +108,11 @@ public class DoublyLinkedList {
             this.tail = null;
         }else{
             this.head = temp.next;
-            this.head.previous = null;
+            this.head.previousious = null;
         }
 
         temp.next = null;
-        temp.previous = null;
+        temp.previousious = null;
 
         decreaseLength();
         return temp;
@@ -131,7 +131,7 @@ public class DoublyLinkedList {
         }else{
             temp = this.tail;
             for(int i = this.length-1; i > index; i--){
-                temp = temp.previous;
+                temp = temp.previousious;
             }
         }
 
@@ -165,12 +165,12 @@ public class DoublyLinkedList {
 
         Node newNode = new Node(value);
         Node temp = get(index);
-        newNode.previous = temp.previous;
+        newNode.previousious = temp.previousious;
         newNode.next = temp.next;
-        temp.previous = newNode;
+        temp.previousious = newNode;
 
-        Node previousNode = newNode.previous;
-        previousNode.next = newNode;
+        Node previousiousNode = newNode.previousious;
+        previousiousNode.next = newNode;
 
         increaseLength();
         return true;
@@ -186,13 +186,13 @@ public class DoublyLinkedList {
         }
 
         Node removedNode = get(index);
-        Node before = removedNode.previous;
+        Node before = removedNode.previousious;
         Node after = removedNode.next;
         before.next = after;
-        after.previous = before;
+        after.previousious = before;
 
         removedNode.next = null;
-        removedNode.previous = null;
+        removedNode.previousious = null;
 
         decreaseLength();
         return removedNode;
@@ -212,10 +212,10 @@ public class DoublyLinkedList {
 	      Node temp = null;
 	      
 	      while(currentNode != null){ // Iterate the list while the pointer is not null
-	          temp = currentNode.previous; // Store the previous node of the pointer in a temporary node
-	          currentNode.previous = currentNode.next; // Invert the pointer of the previous with next
-	          currentNode.next = temp; // Invert the pointer of the next with previous
-	          currentNode = currentNode.previous; // Move the pointer to the previous node
+	          temp = currentNode.previousious; // Store the previousious node of the pointer in a temporary node
+	          currentNode.previousious = currentNode.next; // Invert the pointer of the previousious with next
+	          currentNode.next = temp; // Invert the pointer of the next with previousious
+	          currentNode = currentNode.previousious; // Move the pointer to the previousious node
 	      }
 
         // Invert the head with tail
@@ -225,6 +225,7 @@ public class DoublyLinkedList {
 	    }
     }
 
+	
     public boolean isPalindrome(){
 	    
     	if(this.length < 2) return true;
@@ -236,9 +237,45 @@ public class DoublyLinkedList {
 	        if(start.value != end.value) return false;
 	        
 	        start = start.next;
-	        end = end.prev;
+	        end = end.previousious;
 	    }
 	    
 	    return true;
 	}
-}
+    }
+
+public void swapPairs() {
+        if (head == null || head.next == null) return;
+            
+	Node current = head; // The pointer
+
+        while (current != null && current.next != null) {
+            Node first = current;
+            Node second = current.next;
+            Node nextPair = second.next;
+
+            // Update the connection between the previous node
+            second.previous = first.previous;
+            if (first.previous != null) {
+                first.previous.next = second;
+            } else {
+                head = second; // Update the head if is the first pair
+            }
+
+            // Swap nodes
+            first.previous = second;
+            first.next = nextPair;
+            second.next = first;
+
+            if (nextPair != null) {
+                nextPair.previous = first;
+            } else {
+                tail = first; // Update the tail if is the last node
+            }
+
+            // Move the pointer to the next position
+            current = nextPair;
+        }
+    }
+
+
