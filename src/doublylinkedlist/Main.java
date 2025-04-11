@@ -8,6 +8,7 @@ public class Main {
         list.append(9);
         list.append(2);
         list.append(3);
+        list.append(1);
 
         //list.removeLast();
         //list.prepend(10);
@@ -19,7 +20,8 @@ public class Main {
         //list.remove(0);
 
         //list.swapFirstWithLast();
-        list.reverse();
+        //list.reverse();
+        list.swapPairs();
         list.printAll();
     }
 }

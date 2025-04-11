@@ -9,7 +9,7 @@ public class DoublyLinkedList {
     class Node {
         int value;
         Node next;
-        Node previousious;
+        Node previous;
 
         Node(int value) {
             this.value = value;
@@ -40,7 +40,7 @@ public class DoublyLinkedList {
         }
     }
 
-    public void printAll(){
+    public void printAll() {
         System.out.println("Head: " + this.head.value);
         System.out.println("Tail: " + this.tail.value);
         System.out.println("Length: " + this.length);
@@ -55,7 +55,7 @@ public class DoublyLinkedList {
             this.head = newNode;
             this.tail = newNode;
         } else {
-            newNode.previousious = this.tail;
+            newNode.previous = this.tail;
             this.tail.next = newNode;
             this.tail = newNode;
         }
@@ -63,86 +63,86 @@ public class DoublyLinkedList {
         increaseLength();
     }
 
-    public Node removeLast(){
+    public Node removeLast() {
 
-        if(this.length == 0) return null;
+        if (this.length == 0) return null;
 
         Node temp = this.tail;
 
-        if(this.length == 1) {
+        if (this.length == 1) {
             this.head = null;
             this.tail = null;
-        }else{
-            this.tail = temp.previousious;
+        } else {
+            this.tail = temp.previous;
             tail.next = null;
         }
 
         temp.next = null;
-        temp.previousious = null;
+        temp.previous = null;
 
         decreaseLength();
         return temp;
     }
 
-    public void prepend(int value){
+    public void prepend(int value) {
 
-        if(this.length == 0){
+        if (this.length == 0) {
             append(value);
-        }else{
+        } else {
             Node newNode = new Node(value);
             newNode.next = this.head;
-            this.head.previousious = newNode;
+            this.head.previous = newNode;
             this.head = newNode;
             increaseLength();
         }
     }
 
-    public Node removeFirst(){
+    public Node removeFirst() {
 
-        if(this.length == 0) return null;
+        if (this.length == 0) return null;
 
         Node temp = this.head;
 
-        if(this.length == 1) {
+        if (this.length == 1) {
             this.head = null;
             this.tail = null;
-        }else{
+        } else {
             this.head = temp.next;
-            this.head.previousious = null;
+            this.head.previous = null;
         }
 
         temp.next = null;
-        temp.previousious = null;
+        temp.previous = null;
 
         decreaseLength();
         return temp;
     }
 
-    public Node get(int index){
+    public Node get(int index) {
 
-        if(this.length == 0 || index >= this.length) return null;
+        if (this.length == 0 || index >= this.length) return null;
 
         Node temp = this.head;
 
-        if(index < this.length/2){
-            for(int i = 0; i < index; i++){
+        if (index < this.length / 2) {
+            for (int i = 0; i < index; i++) {
                 temp = temp.next;
             }
-        }else{
+        } else {
             temp = this.tail;
-            for(int i = this.length-1; i > index; i--){
-                temp = temp.previousious;
+            for (int i = this.length - 1; i > index; i--) {
+                temp = temp.previous;
             }
         }
 
         return temp;
     }
 
-    public boolean set(int index, int value){
+    public boolean set(int index, int value) {
 
         Node temp = get(index);
 
-        if(temp != null){
+        if (temp != null) {
             temp.value = value;
             return true;
         }
@@ -150,132 +150,133 @@ public class DoublyLinkedList {
         return false;
     }
 
-    public boolean insert(int index, int value){
+    public boolean insert(int index, int value) {
 
-        if(index < 0 || index >= this.length) return false;
+        if (index < 0 || index >= this.length) return false;
 
-        if(index == 0){
+        if (index == 0) {
             prepend(value);
             return true;
-        }
-        else if(index == this.length-1){
+        } else if (index == this.length - 1) {
             append(value);
             return true;
         }
 
         Node newNode = new Node(value);
         Node temp = get(index);
-        newNode.previousious = temp.previousious;
+        newNode.previous = temp.previous;
         newNode.next = temp.next;
-        temp.previousious = newNode;
+        temp.previous = newNode;
 
-        Node previousiousNode = newNode.previousious;
-        previousiousNode.next = newNode;
+        Node previousNode = newNode.previous;
+        previousNode.next = newNode;
 
         increaseLength();
         return true;
     }
 
-    public Node remove(int index){
-        if(index < 0 || index >= this.length) return null;
+    public Node remove(int index) {
+        if (index < 0 || index >= this.length) return null;
 
-        if(index == 0){
+        if (index == 0) {
             return removeFirst();
         } else if (index == this.length - 1) {
             return removeLast();
         }
 
         Node removedNode = get(index);
-        Node before = removedNode.previousious;
+        Node before = removedNode.previous;
         Node after = removedNode.next;
         before.next = after;
-        after.previousious = before;
+        after.previous = before;
 
         removedNode.next = null;
-        removedNode.previousious = null;
+        removedNode.previous = null;
 
         decreaseLength();
         return removedNode;
     }
 
-    public void swapFirstWithLast(){
-        if(this.length >= 2){
+    public void swapFirstWithLast() {
+        if (this.length >= 2) {
             int temp = head.value;
             head.value = tail.value;
             tail.value = temp;
         }
     }
-    
-    public void reverse(){
-        if(this.length >= 2) {
-	      Node currentNode = this.head; // Set a pointer to the beggining of the list
-	      Node temp = null;
-	      
-	      while(currentNode != null){ // Iterate the list while the pointer is not null
-	          temp = currentNode.previousious; // Store the previousious node of the pointer in a temporary node
-	          currentNode.previousious = currentNode.next; // Invert the pointer of the previousious with next
-	          currentNode.next = temp; // Invert the pointer of the next with previousious
-	          currentNode = currentNode.previousious; // Move the pointer to the previousious node
-	      }
 
-        // Invert the head with tail
-	      temp = this.head;
-	      this.head = this.tail;
-	      this.tail = temp;
-	    }
+    public void reverse() {
+        if (this.length >= 2) {
+            Node currentNode = this.head; // Set a pointer to the beggining of the list
+            Node temp = null;
+
+            while (currentNode != null) { // Iterate the list while the pointer is not null
+                temp = currentNode.previous; // Store the previous node of the pointer in a temporary node
+                currentNode.previous = currentNode.next; // Invert the pointer of the previous with next
+                currentNode.next = temp; // Invert the pointer of the next with previous
+                currentNode = currentNode.previous; // Move the pointer to the previous node
+            }
+
+            // Invert the head with tail
+            temp = this.head;
+            this.head = this.tail;
+            this.tail = temp;
+        }
     }
 
-	
-    public boolean isPalindrome(){
-	    
-    	if(this.length < 2) return true;
-	   
-	    Node start = this.head;
-	    Node end = this.tail;
-	    
-	    for(int i = 0 ; i < this.length/2 ; i++){
-	        if(start.value != end.value) return false;
-	        
-	        start = start.next;
-	        end = end.previousious;
-	    }
-	    
-	    return true;
-	}
+
+    public boolean isPalindrome() {
+
+        if (this.length < 2) return true;
+
+        Node start = this.head;
+        Node end = this.tail;
+
+        for (int i = 0; i < this.length / 2; i++) {
+            if (start.value != end.value) return false;
+
+            start = start.next;
+            end = end.previous;
+        }
+
+        return true;
     }
 
-public void swapPairs() {
+    // Swaps the values of adjacent nodes in the list
+    public void swapPairs() {
         if (head == null || head.next == null) return;
-            
-	Node current = head; // The pointer
+
+        Node current = head; // The pointer
 
         while (current != null && current.next != null) {
             Node first = current;
             Node second = current.next;
             Node nextPair = second.next;
 
-            // Update the connection between the previous node
+            // Connect the second node with the previous of the first node
             second.previous = first.previous;
             if (first.previous != null) {
                 first.previous.next = second;
             } else {
-                head = second; // Update the head if is the first pair
+                head = second; // Update the head in the first loop
             }
 
-            // Swap nodes
-            first.previous = second;
-            first.next = nextPair;
+            // Swap first and second
             second.next = first;
+            first.previous = second;
 
+            // Connect the first with the rest of the list
+            first.next = nextPair;
             if (nextPair != null) {
                 nextPair.previous = first;
             } else {
-                tail = first; // Update the tail if is the last node
+                tail = first; // Update the tail if is the end of the list
             }
 
-            // Move the pointer to the next position
+            // Move the pointer to the next step
             current = nextPair;
         }
     }
+}
 
 
