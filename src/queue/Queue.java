@@ -89,8 +89,14 @@ public class Queue {
         if(getLength() == 0) return null;
 
         Node removedNode = this.first;
-        this.first = this.first.next;
-        removedNode.next = null;
+
+        if(getLength() == 1){
+            this.first = null;
+            this.last = null;
+        }else{
+            this.first = this.first.next;
+            removedNode.next = null;
+        }
 
         decreaseLength();
         return removedNode;
