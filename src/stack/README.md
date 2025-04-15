@@ -28,3 +28,41 @@ This means that the last item added to the stack is the first one to be removed�
 - Syntax parsing.
 
 - Backtracking algorithms.
+
+## Pros of Using a Stack
+- Simple and Fast Operations
+
+Push (add) and pop (remove) are both O(1) operations when implemented well.
+
+- Excellent for Reversing Data
+
+Useful when you need to reverse strings, backtrack through paths (like mazes), or undo actions.
+
+- Used in Function Calls
+
+The call stack in programming uses stacks to manage function calls and returns.
+
+- Memory Efficiency (in specific contexts)
+
+When using recursion, the stack can help manage state without manual bookkeeping.
+
+- Supports Nested Structures
+
+Perfect for parsing expressions, validating balanced brackets, and evaluating postfix notation.
+
+## Cons of Using a Stack
+- Limited Access
+
+Like queues, stacks only allow access to the top element — you can’t peek deeper without popping elements off.
+
+- Overflow & Underflow
+
+In low-level or fixed-size implementations, you need to handle stack overflow (too many elements) or underflow (trying to pop from an empty stack).
+
+- Not Ideal for Order-Preserving Tasks
+
+Since stacks reverse the order of input, they’re not suitable when you need to maintain the original sequence.
+
+- Can Lead to Deep Recursion Issues
+
+In recursive algorithms, especially without tail-call optimization, you can hit the maximum call stack size.
