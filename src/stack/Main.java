@@ -14,5 +14,14 @@ public class Main {
         System.out.println("Removed Node: " + removedNode.value);
         System.out.println("Node peeked (but not removed): " + stack.peek().value);
 
+        System.out.println("----------");
+        String reversedString = StackUtils.reverseString("Alan Ensina");
+        System.out.println(reversedString);
+
+        String parenthesis = "()()()()()";
+        System.out.println(StackUtils.isBalancedParentheses(parenthesis));
+        parenthesis = "(()()))";
+        System.out.println(StackUtils.isBalancedParentheses(parenthesis));
+
     }
 }

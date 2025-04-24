@@ -1,6 +1,6 @@
 package stack;
 
-public class Stack {
+public class Stack<C> {
 
     private Node top;
     private int heigth;
