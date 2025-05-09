@@ -143,3 +143,76 @@ If the BST becomes unbalanced (like a linked list), the time complexity degrades
 O(n).
 
 That's why there are balanced BSTs like AVL trees and Red-Black trees.
+
+## What is Breadth-First Search (BFS)?
+**Breadth-First Search (BFS)** is a graph or tree traversal algorithm that explores all the nodes level by level — meaning it visits all nodes at a certain depth before moving to the next level.
+
+### How BFS works:
+- Start from the root (or starting node).
+
+- Visit all immediate neighbors (children in a tree).
+
+- Then visit their neighbors, and so on.
+
+- It uses a queue (FIFO structure) to keep track of which node to visit next.
+  
+### Use Cases of BFS:
+- Finding the shortest path in unweighted graphs.
+
+- Exploring things level-by-level (e.g., friend suggestions in social networks).
+
+- Level-order traversal in binary trees.
+
+### Example:
+Given this binary tree:
+
+```
+       10
+      /  \
+     6    15
+    / \     \
+   3   8     20
+```
+
+BFS traversal order will be:
+`10 → 6 → 15 → 3 → 8 → 20`
+
+## What is DFS (Depth-First Search)?
+**Depth-First Search (DFS)** is a graph/tree traversal algorithm that explores as far as possible along each branch before backtracking.
+
+### How DFS works:
+- Start at the root (or a starting node).
+
+- Go deep into one branch until you hit a leaf (or a node with no unvisited children).
+
+- Then backtrack and explore other branches.
+
+- DFS uses a stack (LIFO) — either explicitly (with a stack) or implicitly (with recursion).
+
+### Example:
+  Given this tree:
+```
+       10
+      /  \
+     6    15
+    / \     \
+   3   8     20
+```
+A pre-order DFS (root, left, right) would visit the nodes in this order:
+`10 → 6 → 3 → 8 → 15 → 20`
+
+### Types of DFS Traversal in Trees:
+- Pre-order: visit root → left → right
+
+- In-order: left → root → right (commonly used in BSTs to get sorted order)
+
+- Post-order: left → right → root
+
+## DFS vs BFS:
+
+  | Feature      | DFS                         | BFS                                |
+  | ------------ | --------------------------- | ---------------------------------- |
+  | Order        | Deep first, then backtrack  | Level by level                     |
+  | Uses         | Stack or recursion          | Queue                              |
+  | Best for     | Finding paths, maze-solving | Finding shortest path (unweighted) |
+  | Memory usage | Lower in wide/deep trees    | Higher (due to full level storage) |

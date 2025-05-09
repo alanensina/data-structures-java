@@ -32,7 +32,15 @@ public class Main {
         balancedTree.insert(15);
 
         System.out.println(balancedTree.isBalanced());
+        System.out.println("Original tree in order:");
         balancedTree.printInOrder();
-
+        balancedTree.delete(8);
+        System.out.println("After delete the element 8: ");
+        balancedTree.printInOrder();
+        System.out.println("BFS: ");
+        balancedTree.printBFS();
+        System.out.println();
+        System.out.println("DFS: ");
+        balancedTree.printInOrderDFS(balancedTree.root);
     }
 }
